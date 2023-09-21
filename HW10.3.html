@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="HW10.3.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="container">
+
+        <div class="form-container">
+            <form>
+                <input type="text" id="input-1" placeholder="Здесь вводится текст сообщения">
+            </form>
+            <button id="send-message">Отправить</button>  
+        </div>
+        <div id="correspondence-window">
+        </div>
+
+   </div>
+
+<script>
+    
+    const url = 'wss://echo-ws-service.herokuapp.com'
+
+    function contentLoaded() {
+        const div = document.getElementById("correspondence-window");
+        const btn = document.querySelector("#send-message");
+        const input = document.querySelector("input");
+
+        let websocket = new WebSocket(url);
+
+        websocket.onopen = function() {
+            console.log("WS CONNECTED");
+        };
+
+        websocket.onmessage = (event) => {
+            div.innerHTML += `<div class="send in-send">${event.data}</div>`
+        }
+
+        function sendMessage() {
+            if (input.value) {
+                websocket.send(input.value);
+                div.innerHTML += `<div class="send out-send">${input.value}</div>`
+                input.value === "";
+            }
+            else return;
+            input.value === "";
+        }
+
+        btn.addEventListener("click", sendMessage);
+
+    };
+
+
+    document.addEventListener("DOMContentLoaded", contentLoaded);
+    
+</script>
+
+</body>
+</html>

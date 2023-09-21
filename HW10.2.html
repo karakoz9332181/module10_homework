@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            box-shadow: none;
+            cursor: pointer;            
+            display: flex;
+            margin: 5px 10px;
+            padding: 10px 15px;
+            border-radius: 1px;
+            font-size: 12px;
+            line-height: 15px;
+            text-transform: uppercase;
+            color: white;
+            background: #315efb;
+        }
+        .container{
+            height: 1500px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <button class="btn j-btn-test">
+            Размер экрана
+        </button>
+    </div>
+    
+    <script>
+        const btn = document.querySelector("button");
+
+        btn.addEventListener("click", () => {
+            let clientWidth = document.documentElement.clientWidth;
+            let clientHeight = document.documentElement.clientHeight;
+            alert(`Размеры экрана:\nШирина = ${clientWidth} Высота = ${clientHeight}`);
+        });
+
+    </script>
+</body>
+</html>
